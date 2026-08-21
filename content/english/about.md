@@ -6,11 +6,17 @@ image : "images/me.jpg"
 experience:
   enable : true
   title : "EXPERIENCE"
-  experience_list:      
+  experience_list:
+    # experience item loop
+    - name : "Software Development Manager"
+      company : "Lightspeed"
+      duration : "Dec 2023-Present"
+      content : "Working in a product-design-engineering trio, I managed a team of software engineers to deliver changes to the billing platform for the X-series product."
+
     # experience item loop
     - name : "Solution Architect"
       company : "Datacom Payroll"
-      duration : "2020-Present"
+      duration : "2020-Dec 2023"
       content : "Responsible for platform modernisations and improvements. Thinking towards what the future of what the payroll ecosystem at Datacom Payroll will look like and providing technical solutions. Using C#, SQL and Javascript. Gaining knowledge in Azure and Devops."
       
     # experience item loop
@@ -27,9 +33,9 @@ experience:
 
     # experience item loop
     - name : "Owner"
-      company : "Tripwire"
+      company : "Tripwire Tech"
       duration : "2014-Present"
-      content : "Developing my passion projects of mobile apps, blogging and sharing my knowledge through YouTube videos."
+      content : "Building Tripwire Tech mobile apps — including [Curling Diary](/portfolio/curling-diary/), [Lawn Bowls Diary](/portfolio/lawn-bowls-diary/), [Speed Puzzling Diary](/portfolio/speed-puzzling-diary/), and [Revenue Tap](/portfolio/revenue-tap/) — plus blogging and sharing knowledge on YouTube."
 
 ############################### Skill #################################
 skill:
@@ -47,6 +53,14 @@ skill:
     # skill item loop
     - name : "React/React Native"
       percentage : "75%"
+
+    # skill item loop
+    - name : "Engineering Leadership"
+      percentage : "75%"
+      
+    # skill item loop
+    - name : "Stakeholder Management"
+      percentage : "70%"
       
     # skill item loop
     - name : "Swift"
@@ -69,6 +83,11 @@ skill:
 custom_class: "" 
 custom_attributes: "" 
 custom_css: ""
+
+# Used only as a homepage section — do not emit a thin standalone URL
+build:
+  list: never
+  render: never
 ---
 
-It's Chelsea, a full stack developer with working predominantly with .NET. I have a passion for mobile development and exploring different tech.<br>I am a mum of one with another on the way. I enjoy sharing my knowledge with others and learning new things.
+It's Chelsea, a full stack developer working predominantly with .NET, with a passion for mobile development. Through **Tripwire Tech** I ship local-first apps such as [Curling Diary](/portfolio/curling-diary/) (curling scorekeeping & statistics), [Lawn Bowls Diary](/portfolio/lawn-bowls-diary/), [Speed Puzzling Diary](/portfolio/speed-puzzling-diary/), and [Revenue Tap](/portfolio/revenue-tap/) for publisher analytics.<br>I am a mum of one with another on the way. I enjoy sharing my knowledge with others and learning new things.

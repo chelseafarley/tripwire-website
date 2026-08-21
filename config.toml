@@ -9,6 +9,8 @@ paginate = "6"
 summaryLength = "10"
 # disable language
 disableLanguages = [] # disable language from here
+# Avoid empty taxonomy index noise when apps don't use categories/tags
+disableKinds = ["taxonomy", "term"]
 # google analutics
 googleAnalytics = "" # example : UA-123-45
 # disqus short name
@@ -17,7 +19,7 @@ disqusShortname = "" # get your shortname form here : https://disqus.com
 
 ############################# Outputs ##############################
 [outputs]
-home = ["HTML"]
+home = ["HTML", "RSS", "Sitemap"]
 
 [markup.goldmark.renderer]
 unsafe= true
@@ -67,8 +69,11 @@ favicon = "images/logo.png"
 logo_light = "images/logo.png"
 logo_dark = "images/logo.png"
 logo_width = "20px"
+og_image = "images/logo.png"
+brand = "Tripwire Tech"
+email = "chelsea@tripwiretech.com"
 # Meta data
-description = "Tripwire Website"
+description = "Tripwire Tech builds local-first mobile apps for sport journaling and publisher analytics — including Curling Diary, Lawn Bowls Diary, Speed Puzzling Diary, and Revenue Tap — by Chelsea Suddens."
 author = "Chelsea Suddens"
 
 # Preloader

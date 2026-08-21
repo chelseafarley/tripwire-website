@@ -1,0 +1,68 @@
+<head>
+  <meta charset="utf-8">
+  {{- $brand := site.Params.brand | default "Tripwire Tech" -}}
+  {{- $pageTitle := .Title -}}
+  {{- with .Params.seo_title }}{{ $pageTitle = . }}{{ end -}}
+  {{- if .IsHome -}}
+  <title>{{ site.Title }} | {{ $brand }} — Apps &amp; Software</title>
+  {{- else -}}
+  <title>{{ $pageTitle }} | {{ $brand }}</title>
+  {{- end }}
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  {{- $description := "" -}}
+  {{- with .Params.description }}{{ $description = . }}{{ else }}{{ with site.Params.description }}{{ $description = . }}{{ end }}{{ end -}}
+  <meta name="description" content="{{ $description }}">
+  {{ with site.Params.author }}
+  <meta name="author" content="{{ . }}">{{ end }}
+  {{ with .Params.keywords }}
+  <meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
+  {{ hugo.Generator }}
+
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ with .Params.robots }}
+  <meta name="robots" content="{{ . }}">
+  {{ end }}
+
+  <!-- plugins -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  {{ range site.Params.plugins.css }}
+  <link rel="stylesheet" href="{{ .link | absURL }}">
+  {{ end }}
+
+  <!-- Main Stylesheet -->
+  {{ $styles := resources.Get "css/style.css" | minify }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
+
+  <!-- Custom stylesheet -->
+  {{ $custom := resources.Get "css/custom.css" | minify }}
+  <link rel="stylesheet" href="{{ $custom.Permalink }}" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon">
+  <link rel="icon" href="{{ site.Params.favicon | absURL }}" type="image/x-icon">
+
+  <!-- multilingual SEO optimizations -->
+  {{ if .IsTranslated }}
+  {{ range .Page.AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
+  {{ end }}
+  {{ end }}
+
+  {{- $ogImage := "" -}}
+  {{- with .Params.image }}{{ $ogImage = . | absURL }}{{ end -}}
+  {{- if not $ogImage }}{{ with site.Params.og_image }}{{ $ogImage = . | absURL }}{{ end }}{{ end -}}
+  {{- if not $ogImage }}{{ $ogImage = site.Params.favicon | absURL }}{{ end -}}
+  <meta property="og:image" content="{{ $ogImage }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ if .IsHome }}{{ site.Title }} | {{ $brand }}{{ else }}{{ $pageTitle }}{{ end }}">
+  <meta name="twitter:description" content="{{ $description }}">
+  <meta name="twitter:image" content="{{ $ogImage }}">
+
+  {{ template "_internal/opengraph.html" . }}
+  {{ template "_internal/twitter_cards.html" . }}
+  {{ template "_internal/google_analytics.html" . }}
+
+  {{ partial "schema.html" . }}
+</head>

@@ -6,21 +6,24 @@ last_name : "SUDDENS"
 bg_image : "images/me.jpg"
 # animated text loop
 occupations:
-- "Solution Architect"
+- "Software Development Manager"
 - "Mobile Developer"
 - "Full Stack Developer"
-- "Side Hustler"
+- "Tripwire Tech Founder"
 
 # slider background image loop
+# Use existing on-site imagery until dedicated slider assets are added
 slider_images:
-- "images/slider/slider-1.jpg"
-- "images/slider/slider-2.jpg"
-- "images/slider/slider-3.jpg"
-- "images/slider/slider-3.jpg"
+- "images/me.jpg"
+- "images/me.jpg"
+- "images/me.jpg"
 
 # custom style
 custom_class: "" 
 custom_attributes: "" 
 custom_css: ""
 
+build:
+  list: never
+  render: never
 ---

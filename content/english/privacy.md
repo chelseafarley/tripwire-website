@@ -1,14 +1,18 @@
 ---
 title: "Privacy Policy"
-description: "How this app handles your information."
+description: "General Tripwire Tech privacy information. For app-specific policies see Sports Journal and Revenue Tap privacy pages."
 draft: false
+robots: "noindex, follow"
 ---
 
 **Last updated:** June 30, 2026
 
 ## Introduction
 
-This Privacy Policy explains how this app handles your information.
+This page is a general privacy note for Tripwire Tech. For the apps currently shipping, use the dedicated policies:
+
+- [Sports journal apps privacy policy](/sports-journal-privacy-policy/) (Curling Diary, Lawn Bowls Diary, Speed Puzzling Diary)
+- [Revenue Tap privacy policy](/revenue-tap-privacy-policy/)
 
 ## Information We Collect
 
