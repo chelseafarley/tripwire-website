@@ -16,6 +16,8 @@ software_application:
   application_category: "SportsApplication"
   operating_system: "iOS, Android (phone, tablet, and watch companions)"
   price: "0"
+  app_store_url: "https://apps.apple.com/us/app/speed-puzzling-diary/id6798911566"
+  play_store_url: "https://play.google.com/store/apps/details?id=com.speedpuzzlediary.speed_puzzle_diary"
   feature_list:
     - "Timed practice drills"
     - "Competition and practice journaling"
@@ -28,10 +30,10 @@ project_info:
   content: "[Sports journal privacy policy](/sports-journal-privacy-policy/)"
 - name: "App Store"
   icon: "fab fa-apple"
-  content: "Coming soon"
+  content: "[Download on the App Store](https://apps.apple.com/us/app/speed-puzzling-diary/id6798911566)"
 - name: "Google Play"
   icon: "fab fa-google-play"
-  content: "Coming soon"
+  content: "[Get it on Google Play](https://play.google.com/store/apps/details?id=com.speedpuzzlediary.speed_puzzle_diary)"
 faqs:
   - question: "What is Speed Puzzling Diary?"
     answer: "Speed Puzzling Diary is a speed puzzling timer and training tracker from Tripwire Tech. It helps puzzlers plan drills, run timed practice, journal rounds, and review progress locally on the device."
@@ -88,7 +90,10 @@ Use the Apple Watch or Wear OS companion to control live practice without pickin
 
 ## Platforms
 
-Available for **iOS and Android** (phone and tablet), with optional watch companions for Pro. App Store and Google Play links will be added when listings are live.
+Available for **iOS and Android** (phone and tablet), with optional watch companions for Pro.
+
+- [Download on the App Store](https://apps.apple.com/us/app/speed-puzzling-diary/id6798911566)
+- [Get it on Google Play](https://play.google.com/store/apps/details?id=com.speedpuzzlediary.speed_puzzle_diary)
 
 ## Speed Puzzling Diary Pro
 

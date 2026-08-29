@@ -16,6 +16,7 @@ software_application:
   application_category: "SportsApplication"
   operating_system: "iOS, Android (phone, tablet, and watch companions)"
   price: "0"
+  app_store_url: "https://apps.apple.com/us/app/curling-diary/id6795368212"
   feature_list:
     - "Game and practice journaling"
     - "Line scores, hammer, venue, and results"
@@ -28,7 +29,7 @@ project_info:
   content: "[Sports journal privacy policy](/sports-journal-privacy-policy/)"
 - name: "App Store"
   icon: "fab fa-apple"
-  content: "Coming soon"
+  content: "[Download on the App Store](https://apps.apple.com/us/app/curling-diary/id6795368212)"
 - name: "Google Play"
   icon: "fab fa-google-play"
   content: "Coming soon"
@@ -40,9 +41,9 @@ faqs:
   - question: "Does Curling Diary keep my data in the cloud?"
     answer: "No. Journal and practice content is stored locally on your device. Tripwire Tech does not host your diary content on Tripwire servers. See the sports journal privacy policy for details."
   - question: "Is there a free version and a Pro version?"
-    answer: "Yes. Core journaling and practice features are available on Free. Pro unlocks extras such as unlimited practice templates, Health sync, watch companions, deeper insights history, and more — via App Store or Google Play subscriptions when the app is live."
+    answer: "Yes. Core journaling and practice features are available on Free. Pro unlocks extras such as unlimited practice templates, Health sync, watch companions, deeper insights history, and more — via App Store or Google Play subscriptions."
   - question: "Which platforms does Curling Diary support?"
-    answer: "iOS and Android on phone and tablet, with optional Apple Watch and Wear OS companions for Pro users."
+    answer: "iOS and Android on phone and tablet, with optional Apple Watch and Wear OS companions for Pro users. Curling Diary is available on the App Store; Google Play is coming soon."
 related_apps:
   - maths-for-kids
   - lawn-bowls-diary
@@ -98,7 +99,8 @@ Competitive and committed recreational curlers who want:
 
 Curling Diary is designed for **iOS and Android**, including phone and tablet layouts, with optional **Apple Watch / Wear OS** companions for Pro.
 
-App Store and Google Play links will be added here when the listings go live.
+- [Download on the App Store](https://apps.apple.com/us/app/curling-diary/id6795368212)
+- Google Play: Coming soon
 
 ## Curling Diary Pro
 

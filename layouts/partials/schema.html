@@ -37,6 +37,20 @@
   {{- with $appParams.feature_list -}}
     {{- $app = merge $app (dict "featureList" .) -}}
   {{- end -}}
+  {{- $sameAs := slice -}}
+  {{- with $appParams.app_store_url -}}
+    {{- $sameAs = $sameAs | append . -}}
+    {{- $app = merge $app (dict "installUrl" .) -}}
+  {{- end -}}
+  {{- with $appParams.play_store_url -}}
+    {{- $sameAs = $sameAs | append . -}}
+    {{- if not $appParams.app_store_url -}}
+      {{- $app = merge $app (dict "installUrl" .) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt (len $sameAs) 0 -}}
+    {{- $app = merge $app (dict "sameAs" $sameAs) -}}
+  {{- end -}}
   {{- $graph = $graph | append $app -}}
   {{- $crumbs := slice
     (dict "@type" "ListItem" "position" 1 "name" "Home" "item" $orgURL)

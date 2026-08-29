@@ -16,6 +16,8 @@ software_application:
   application_category: "SportsApplication"
   operating_system: "iOS, Android (phone, tablet, and watch companions)"
   price: "0"
+  app_store_url: "https://apps.apple.com/us/app/lawn-bowls-diary/id6799413552"
+  play_store_url: "https://play.google.com/store/apps/details?id=com.lawnbowlsdiary.lawn_bowls_diary"
   feature_list:
     - "Match and practice journaling"
     - "Singles, pairs, triples, and fours scoring"
@@ -28,10 +30,10 @@ project_info:
   content: "[Sports journal privacy policy](/sports-journal-privacy-policy/)"
 - name: "App Store"
   icon: "fab fa-apple"
-  content: "Coming soon"
+  content: "[Download on the App Store](https://apps.apple.com/us/app/lawn-bowls-diary/id6799413552)"
 - name: "Google Play"
   icon: "fab fa-google-play"
-  content: "Coming soon"
+  content: "[Get it on Google Play](https://play.google.com/store/apps/details?id=com.lawnbowlsdiary.lawn_bowls_diary)"
 faqs:
   - question: "What is Lawn Bowls Diary?"
     answer: "Lawn Bowls Diary is a lawn bowls scoring and statistics app from Tripwire Tech. It helps bowlers journal matches, run practice sessions, and review progress with local-first storage on your device."
@@ -86,7 +88,8 @@ See trends in your practice and competition results so you can spot what is impr
 
 Lawn Bowls Diary supports **iOS and Android** (phone and tablet), with optional **Apple Watch / Wear OS** companions for Pro.
 
-Store listing links will be added when the app is live on the App Store and Google Play.
+- [Download on the App Store](https://apps.apple.com/us/app/lawn-bowls-diary/id6799413552)
+- [Get it on Google Play](https://play.google.com/store/apps/details?id=com.lawnbowlsdiary.lawn_bowls_diary)
 
 ## Pro features
 
