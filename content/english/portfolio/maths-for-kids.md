@@ -152,9 +152,16 @@ Explore other Tripwire Tech apps: [Curling Diary](/portfolio/curling-diary/), [L
 ![Maths For Kids kids math learning app phone screenshot 2](/images/portfolio/maths-for-kids/phone/2.png)
 ![Maths For Kids addition practice phone screenshot 3](/images/portfolio/maths-for-kids/phone/3.png)
 ![Maths For Kids child progress phone screenshot 4](/images/portfolio/maths-for-kids/phone/4.png)
+![Maths For Kids maths practice modules phone screenshot 5](/images/portfolio/maths-for-kids/phone/5.png)
+![Maths For Kids visual maths games phone screenshot 6](/images/portfolio/maths-for-kids/phone/6.png)
+![Maths For Kids learning modes phone screenshot 7](/images/portfolio/maths-for-kids/phone/7.png)
 
 ## iPad screenshots
 
 ![Maths For Kids iPad maths practice screenshot 1](/images/portfolio/maths-for-kids/ipad/1.png)
 ![Maths For Kids iPad learning games screenshot 2](/images/portfolio/maths-for-kids/ipad/2.png)
 ![Maths For Kids iPad parent progress screenshot 3](/images/portfolio/maths-for-kids/ipad/3.png)
+![Maths For Kids iPad number sense screenshot 4](/images/portfolio/maths-for-kids/ipad/4.png)
+![Maths For Kids iPad fractions practice screenshot 5](/images/portfolio/maths-for-kids/ipad/5.png)
+![Maths For Kids iPad geometry games screenshot 6](/images/portfolio/maths-for-kids/ipad/6.png)
+![Maths For Kids iPad today’s challenge screenshot 7](/images/portfolio/maths-for-kids/ipad/7.png)
