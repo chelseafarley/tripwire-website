@@ -44,6 +44,7 @@ faqs:
   - question: "What does Pro unlock?"
     answer: "Pro unlocks extras such as custom drills, green diagrams, unlimited practice templates, full historical insights, practice share and import, Health sync, and watch companions — via store subscriptions when available."
 related_apps:
+  - maths-for-kids
   - curling-diary
   - speed-puzzling-diary
   - revenue-tap

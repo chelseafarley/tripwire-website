@@ -35,7 +35,7 @@ experience:
     - name : "Owner"
       company : "Tripwire Tech"
       duration : "2014-Present"
-      content : "Building Tripwire Tech mobile apps — including [Curling Diary](/portfolio/curling-diary/), [Lawn Bowls Diary](/portfolio/lawn-bowls-diary/), [Speed Puzzling Diary](/portfolio/speed-puzzling-diary/), and [Revenue Tap](/portfolio/revenue-tap/) — plus blogging and sharing knowledge on YouTube."
+      content : "Building Tripwire Tech mobile apps — including [Maths For Kids](/portfolio/maths-for-kids/), [Curling Diary](/portfolio/curling-diary/), [Lawn Bowls Diary](/portfolio/lawn-bowls-diary/), [Speed Puzzling Diary](/portfolio/speed-puzzling-diary/), and [Revenue Tap](/portfolio/revenue-tap/) — plus blogging and sharing knowledge on YouTube."
 
 ############################### Skill #################################
 skill:
@@ -90,4 +90,4 @@ build:
   render: never
 ---
 
-It's Chelsea, a full stack developer working predominantly with .NET, with a passion for mobile development. Through **Tripwire Tech** I ship local-first apps such as [Curling Diary](/portfolio/curling-diary/) (curling scorekeeping & statistics), [Lawn Bowls Diary](/portfolio/lawn-bowls-diary/), [Speed Puzzling Diary](/portfolio/speed-puzzling-diary/), and [Revenue Tap](/portfolio/revenue-tap/) for publisher analytics.<br>I am a mum of one with another on the way. I enjoy sharing my knowledge with others and learning new things.
+It's Chelsea, a full stack developer working predominantly with .NET, with a passion for mobile development. Through **Tripwire Tech** I ship local-first apps such as [Maths For Kids](/portfolio/maths-for-kids/) (maths games for ages 5–8), [Curling Diary](/portfolio/curling-diary/) (curling scorekeeping & statistics), [Lawn Bowls Diary](/portfolio/lawn-bowls-diary/), [Speed Puzzling Diary](/portfolio/speed-puzzling-diary/), and [Revenue Tap](/portfolio/revenue-tap/) for publisher analytics.<br>I am a mum of one with another on the way. I enjoy sharing my knowledge with others and learning new things.
