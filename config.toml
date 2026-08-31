@@ -73,7 +73,7 @@ og_image = "images/logo.png"
 brand = "Tripwire Tech"
 email = "chelsea@tripwiretech.com"
 # Meta data
-description = "Tripwire Tech builds local-first mobile apps — including Maths For Kids, Curling Diary, Lawn Bowls Diary, Speed Puzzling Diary, and Revenue Tap — by Chelsea Suddens."
+description = "Tripwire Tech builds local-first mobile apps — including Castle Adventure Chess, Maths For Kids, Curling Diary, Lawn Bowls Diary, Speed Puzzling Diary, and Revenue Tap — by Chelsea Suddens."
 author = "Chelsea Suddens"
 
 # Preloader
@@ -129,3 +129,8 @@ name = "Portfolio"
 pre = "#"
 url = "portfolio"
 weight = 4
+
+[[Languages.en.menu.main]]
+name = "Blog"
+url = "blog"
+weight = 5

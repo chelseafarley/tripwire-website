@@ -45,6 +45,7 @@ faqs:
   - question: "Which platforms does Curling Diary support?"
     answer: "iOS and Android on phone and tablet, with optional Apple Watch and Wear OS companions for Pro users. Curling Diary is available on the App Store; Google Play is coming soon."
 related_apps:
+  - castle-adventure-chess
   - maths-for-kids
   - lawn-bowls-diary
   - speed-puzzling-diary

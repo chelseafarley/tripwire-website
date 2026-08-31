@@ -46,6 +46,7 @@ faqs:
   - question: "Which platforms are supported?"
     answer: "iOS and Android on phone and tablet, with optional Apple Watch and Wear OS companions for Pro."
 related_apps:
+  - castle-adventure-chess
   - maths-for-kids
   - curling-diary
   - lawn-bowls-diary

@@ -47,6 +47,7 @@ faqs:
   - question: "Which platforms are supported?"
     answer: "Maths For Kids is built for iPhone and iPad. App Store and Google Play links will be added when listings are live."
 related_apps:
+  - castle-adventure-chess
   - curling-diary
   - lawn-bowls-diary
   - speed-puzzling-diary

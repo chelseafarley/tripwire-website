@@ -21,6 +21,8 @@ If you have questions, contact **chelsea@tripwiretech.com**.
 
 Maths For Kids is a maths learning app for children. Play does **not** require creating an account with Tripwire Tech.
 
+**Castle Adventure Chess** is a chess learning app for children. Progress and parent settings stay on the device; play does not require a Tripwire Tech account.
+
 Information you or a parent create in the app (for example child profiles and progress) is stored **locally on your device**. We do not operate a Maths For Kids cloud account for that content.
 
 The App does **not** sell personal information.
