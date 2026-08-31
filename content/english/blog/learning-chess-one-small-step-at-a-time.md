@@ -2,7 +2,6 @@
 title: "Learning Chess One Small Step at a Time"
 seo_title: "Learning Chess One Small Step at a Time — Castle Adventure Chess"
 date: 2026-08-31T12:30:00+12:00
-image: "images/blog/castle-adventure-chess/home.png"
 description: "Why Castle Adventure Chess teaches kids chess through small puzzles and guided games — real rules, gradual progress, and less overwhelm for ages 5–12."
 keywords:
   - learn chess for kids
@@ -18,8 +17,6 @@ The hard part is the beginning. A complete game introduces six different pieces,
 
 That is why **[Castle Adventure Chess](/portfolio/castle-adventure-chess/)** teaches chess in small, manageable steps.
 
-![Castle Adventure Chess home screen on iPhone](/images/blog/castle-adventure-chess/home.png)
-
 ## Small puzzles that still follow real chess rules
 
 Instead of beginning with a full chess game, children work through short puzzles and activities that follow genuine chess rules.
@@ -30,15 +27,11 @@ Because the puzzles use real chess movement and rules, each activity builds towa
 
 As they travel through the castle adventure map, new concepts are introduced gradually, giving children time to become comfortable with one idea before moving on to the next.
 
-![Castle Adventure Chess kingdom map on iPad](/images/blog/castle-adventure-chess/map.png)
-
 ## From puzzles to complete chess games
 
 Eventually those small lessons begin to come together into complete games.
 
 This is where **Learner Chess** helps bridge the gap between practising individual skills and playing independently.
-
-![Castle Adventure Chess Learner Chess assisted mode](/images/blog/castle-adventure-chess/learner-mode.png)
 
 In assisted mode, Castle Adventure Chess can help children recognise threatened pieces, spot risky moves, and think again before committing. The aim is not to play the game for them — it is to give enough guidance for children to make their own decisions while building confidence.
 
