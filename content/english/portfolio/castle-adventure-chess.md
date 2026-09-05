@@ -52,6 +52,7 @@ faqs:
   - question: "Where can I download it?"
     answer: "Castle Adventure Chess is available on the App Store and Google Play for iPhone, iPad, and Android."
 related_apps:
+  - 50-first-foods
   - maths-for-kids
   - curling-diary
   - lawn-bowls-diary

@@ -45,6 +45,7 @@ faqs:
   - question: "Is Revenue Tap a payout or banking tool?"
     answer: "No. It is a reporting app. Totals follow each source’s delay, and store proceeds conversions can differ from Apple’s later payout estimates."
 related_apps:
+  - 50-first-foods
   - castle-adventure-chess
   - maths-for-kids
   - curling-diary

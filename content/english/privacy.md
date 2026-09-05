@@ -1,14 +1,14 @@
 ---
 title: "Privacy Policy"
-description: "Privacy policy for Maths For Kids and general Tripwire Tech app privacy. Local-first storage; no sale of personal information."
+description: "Privacy policy for Maths For Kids, 50 First Foods, Castle Adventure Chess, and general Tripwire Tech app privacy. Local-first storage; no sale of personal information."
 draft: false
 ---
 
-**Last updated:** 30 August 2026
+**Last updated:** 6 September 2026
 
 ## Introduction
 
-This Privacy Policy explains how **Tripwire Tech** (“we”, “us”, or “our”) handles information in **Maths For Kids** and other apps that link to this page.
+This Privacy Policy explains how **Tripwire Tech** (“we”, “us”, or “our”) handles information in **Maths For Kids**, **50 First Foods**, **Castle Adventure Chess**, and other apps that link to this page.
 
 App-specific policies also exist for some products:
 
@@ -17,14 +17,15 @@ App-specific policies also exist for some products:
 
 If you have questions, contact **chelsea@tripwiretech.com**.
 
-## Maths For Kids
+## Maths For Kids, Castle Adventure Chess, and 50 First Foods
 
 Maths For Kids is a maths learning app for children. Play does **not** require creating an account with Tripwire Tech.
 
 **Castle Adventure Chess** is a chess learning app for children. Progress and parent settings stay on the device; play does not require a Tripwire Tech account.
 
-Information you or a parent create in the app (for example child profiles and progress) is stored **locally on your device**. We do not operate a Maths For Kids cloud account for that content.
+**50 First Foods** is a baby first foods tracker for starting solids. Food attempts, notes, meal plans, and related entries stay on the device; tracking does not require a Tripwire Tech account.
 
+Information you or a parent create in these apps (for example child profiles, progress, or food tracking) is stored **locally on your device**. We do not operate a cloud account for that content.
 The App does **not** sell personal information.
 
 ## Information We Collect
