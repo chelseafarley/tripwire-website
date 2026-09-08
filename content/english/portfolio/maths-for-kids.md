@@ -4,7 +4,7 @@ seo_title: "Maths For Kids — Maths Games for Ages 5–8"
 seo_h1: "Maths For Kids: playful maths games & practice for ages 5–8"
 date: 2026-08-30T10:00:00+12:00
 image: "images/portfolio/maths-for-kids/icon.png"
-description: "Maths For Kids by Tripwire Tech is a maths learning app for children aged about 5 to 8 — short visual games for counting, addition, fractions, time, and more, with parent progress tracking and no account required to play."
+description: "Maths For Kids by Tripwire Tech is a maths learning app for children aged about 5 to 8 — short visual games for counting, addition, fractions, time, and more, with parent progress tracking and no account required to play. Available on iPhone, iPad, and Android."
 keywords:
   - maths games for kids
   - math practice for kids ages 5-8
@@ -15,8 +15,10 @@ keywords:
 draft: false
 software_application:
   application_category: "EducationalApplication"
-  operating_system: "iOS (iPhone and iPad)"
+  operating_system: "iOS, Android (iPhone, iPad, and Android)"
   price: "0"
+  app_store_url: "https://apps.apple.com/us/app/maths-games-maths-for-kids/id6805423804"
+  play_store_url: "https://play.google.com/store/apps/details?id=com.mathsforkids.maths_for_kids"
   feature_list:
     - "Learn, Explore, and Play modes"
     - "Low-stimulation visual maths games"
@@ -29,10 +31,10 @@ project_info:
   content: "[Privacy policy](/privacy/)"
 - name: "App Store"
   icon: "fab fa-apple"
-  content: "Coming soon"
+  content: "[Download on the App Store](https://apps.apple.com/us/app/maths-games-maths-for-kids/id6805423804)"
 - name: "Google Play"
   icon: "fab fa-google-play"
-  content: "Coming soon"
+  content: "[Get it on Google Play](https://play.google.com/store/apps/details?id=com.mathsforkids.maths_for_kids)"
 faqs:
   - question: "What is Maths For Kids?"
     answer: "Maths For Kids is a maths learning app from Tripwire Tech for children aged about 5 to 8. It builds number confidence through short, playful visual games — not worksheets — with tap, choose, or drag answers so children never have to type."
@@ -44,8 +46,8 @@ faqs:
     answer: "Yes. You can create multiple child profiles and see strengths and areas for improvement for each learner."
   - question: "Does Maths For Kids require an account?"
     answer: "No account is required for play. Learning is offline-friendly, with progress stored for the profiles on the device."
-  - question: "Which platforms are supported?"
-    answer: "Maths For Kids is built for iPhone and iPad. App Store and Google Play links will be added when listings are live."
+  - question: "Where can I download Maths For Kids?"
+    answer: "Maths For Kids is available on the App Store for iPhone and iPad, and on Google Play for Android."
 related_apps:
   - 50-first-foods
   - castle-adventure-chess
@@ -132,7 +134,10 @@ A mixed set of questions that pulls skills together across games — great for r
 
 ## Platforms
 
-Maths For Kids is designed for **iPhone and iPad**. App Store and Google Play links will be added here when the listings go live.
+Available on **iPhone, iPad, and Android**:
+
+- [Download on the App Store](https://apps.apple.com/us/app/maths-games-maths-for-kids/id6805423804)
+- [Get it on Google Play](https://play.google.com/store/apps/details?id=com.mathsforkids.maths_for_kids)
 
 ## Why families choose Maths For Kids
 
