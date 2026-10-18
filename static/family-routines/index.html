@@ -53,6 +53,9 @@
     const context = cast.framework.CastReceiverContext.getInstance();
     const options = new cast.framework.CastReceiverOptions();
     options.customNamespaces = { [NAMESPACE]: cast.framework.system.MessageType.JSON };
+    // No media is ever loaded, so without this CAF closes the app after ~5 idle minutes.
+    options.disableIdleTimeout = true;
+    options.skipPlayersLoad = true;
     context.addCustomMessageListener(NAMESPACE, (event) => {
       const msg = event.data;
       if (!msg || !msg.type) return;
