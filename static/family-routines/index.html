@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Family Routines — Cast Receiver</title>
   <script src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,500,1,0&display=block"/>
   <style>
     :root { --bg:#132823; --ink:#fff; --mint:#8be3b3; --muted:#a6c8b8; --card:#29473e; --alt:#493c5c; }
     * { box-sizing: border-box; }
@@ -28,6 +29,9 @@
     .art { width:110px; height:110px; border-radius:20px; background:rgba(255,255,255,.12); flex-shrink:0; display:grid; place-items:center; font-size:60px; overflow:hidden; }
     .art.small { width:56px; height:56px; font-size:30px; border-radius:14px; }
     .art img { width:100%; height:100%; object-fit:cover; }
+    .art .ms { font-family:'Material Symbols Rounded'; font-size:72px; line-height:1; color:#fff; font-variation-settings:'FILL' 1; }
+    .art.small .ms { font-size:36px; }
+    .eta { margin-top:6px; color:var(--mint); font-size:24px; font-weight:800; }
     .first-then { display:grid; grid-template-columns: 1fr auto 1fr; gap:16px; align-items:stretch; margin-top:16px; }
     .ft-box { background:rgba(255,255,255,.08); border-radius:18px; padding:20px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; }
     .ft-box.then { opacity:.75; }
@@ -48,6 +52,7 @@
         <div>
           <div class="eyebrow">Now playing</div>
           <h1 id="title">Routine</h1>
+          <div class="eta" id="eta"></div>
         </div>
         <div class="clock">
           <div class="eyebrow">Current time</div>
@@ -62,16 +67,22 @@
     const NAMESPACE = 'urn:x-cast:com.familyroutines.session';
     let session = null;
     let display = { mode: 'timer', showTimer: true };
+    let symbolsReady = false;
 
+    // Fallback when the icon font can't load (e.g. no internet on the TV).
     const EMOJI = {
       moon:'🌙', sun:'☀️', star:'⭐', heart:'❤️', home:'🏠', backpack:'🎒', school:'🏫',
       leave_for_school:'🚶', breakfast:'🥣', snack:'🍎', lunch:'🥪', dinner:'🍽️', water:'💧',
-      shower:'🚿', bath:'🛁', brush_teeth:'🪥', toilet:'🚽', wash_hands:'🧼', hair:'💇',
+      shower:'🚿', bath:'🛁', brush_teeth:'😁', toilet:'🚽', wash_hands:'🧼', hair:'💇',
       get_dressed:'👕', pyjamas:'🌙', school_uniform:'👔', shoes:'👟', socks:'🧦', medicine:'💊',
       homework:'📚', reading:'📖', story:'📖', music:'🎵', art:'🎨', sports:'⚽', swim:'🏊',
-      bike:'🚲', play:'🧸', tidy_up:'🧹', laundry:'🧺', pets:'🐾', garden:'🌳', car:'🚗',
+      bike:'🚲', play:'🧸', tidy_up:'🧹', laundry:'👕', pets:'🐾', garden:'🌳', car:'🚗',
       shopping:'🛒', screen_time:'📱', bed:'🛏️', cuddle:'🤗', clock:'⏰'
     };
+
+    document.fonts.load('48px "Material Symbols Rounded"', 'home').then((faces) => {
+      if (faces.length) { symbolsReady = true; build(); }
+    }).catch(() => {});
 
     const context = cast.framework.CastReceiverContext.getInstance();
     const options = new cast.framework.CastReceiverOptions();
@@ -85,7 +96,7 @@
       if (msg.type === 'sessionSnapshot' || msg.type === 'sessionUpdated') {
         session = msg.payload && msg.payload.session;
         if (msg.payload && msg.payload.display) display = msg.payload.display;
-        render();
+        build();
         context.sendCustomMessage(NAMESPACE, event.senderId, {
           type: 'ack', sessionId: msg.sessionId, revision: msg.revision, commandId: msg.commandId, payload: {}
         });
@@ -116,16 +127,23 @@
       }[c]));
     }
 
+    function iconHtml(activity) {
+      if (symbolsReady && activity.iconName) {
+        return `<span class="ms">${esc(activity.iconName)}</span>`;
+      }
+      return EMOJI[activity.illustrationKey] || '⭐';
+    }
+
     function art(activity, small) {
       const cls = small ? 'art small' : 'art';
       if (!activity) return `<div class="${cls}">🎉</div>`;
-      const emoji = EMOJI[activity.illustrationKey] || '⭐';
       const label = esc(activity.semanticLabel || activity.title || 'Activity');
       if (activity.castImageUrl) {
-        // LAN HTTP URL from the phone while casting; fall back to the emoji.
-        return `<div class="${cls}"><img src="${esc(activity.castImageUrl)}" alt="${label}" onerror="this.parentNode.textContent='${emoji}'"/></div>`;
+        // LAN HTTP URL from the phone while casting; falls back to the icon.
+        const fallback = esc(EMOJI[activity.illustrationKey] || '⭐');
+        return `<div class="${cls}"><img src="${esc(activity.castImageUrl)}" alt="${label}" onerror="this.parentNode.textContent='${fallback}'"/></div>`;
       }
-      return `<div class="${cls}" aria-label="${label}">${emoji}</div>`;
+      return `<div class="${cls}" aria-label="${label}">${iconHtml(activity)}</div>`;
     }
 
     function timerText(t, current) {
@@ -136,72 +154,123 @@
       return fmt(remaining(current));
     }
 
-    function bar(current) {
-      if (!display.showTimer || !current) return '';
+    function barPct(current) {
+      if (!current) return null;
       const left = remaining(current);
       const planned = current.plannedDurationMs || current.countdownMs;
-      if (!planned || left == null) return '';
-      const pct = Math.max(0, Math.min(100, 100 * (1 - left / planned)));
-      return `<div class="bar"><span style="width:${pct}%"></span></div>`;
+      if (!planned || left == null) return null;
+      return Math.max(0, Math.min(100, 100 * (1 - left / planned)));
     }
 
-    function timerView(t, current, next) {
+    // Time-dependent pieces carry data-timer / data-bar so tick() can update
+    // them without rebuilding the DOM (rebuilding reloads photos = flicker).
+    function timerSpan(i, t, current, style) {
+      return `<div class="count" data-timer="${i}"${style ? ` style="${style}"` : ''}>${timerText(t, current)}</div>`;
+    }
+
+    function bar(i, current) {
+      if (!display.showTimer || barPct(current) == null) return '';
+      return `<div class="bar"><span data-bar="${i}" style="width:${barPct(current)}%"></span></div>`;
+    }
+
+    function timerView(i, t, current, next) {
       return `<div class="task"><div>
           <div class="eyebrow">${t.completed ? 'Finished' : 'Now'}</div>
           <div class="task-title">${t.completed ? 'All done' : esc(current ? current.title : '')}</div>
-          <div class="count">${timerText(t, current)}</div></div>
+          ${timerSpan(i, t, current)}</div>
           ${art(t.completed ? null : current)}</div>
-        ${bar(current)}
+        ${bar(i, current)}
         <div class="next">${t.completed ? '' : 'Next: ' + esc(next ? next.title : 'All done!')}</div>`;
     }
 
-    function firstThenView(t, current, next) {
-      if (t.completed) return timerView(t, current, next);
+    function firstThenView(i, t, current, next) {
+      if (t.completed) return timerView(i, t, current, next);
       return `<div class="first-then">
           <div class="ft-box"><div class="eyebrow">First</div>${art(current)}
             <div class="task-title">${esc(current ? current.title : '')}</div>
-            <div class="count" style="font-size:40px">${timerText(t, current)}</div></div>
+            ${timerSpan(i, t, current, 'font-size:40px')}</div>
           <div class="ft-arrow">→</div>
           <div class="ft-box then"><div class="eyebrow">Then</div>${art(next)}
             <div class="task-title">${esc(next ? next.title : 'All done!')}</div></div>
-        </div>${bar(current)}`;
+        </div>${bar(i, current)}`;
     }
 
-    function timetableView(t) {
-      const rows = t.activities.map((a, i) => {
-        const done = t.completed || i < t.currentIndex;
-        const now = !t.completed && i === t.currentIndex;
-        const left = now ? timerText(t, a) : '';
+    function timetableView(i, t) {
+      const rows = t.activities.map((a, j) => {
+        const done = t.completed || j < t.currentIndex;
+        const now = !t.completed && j === t.currentIndex;
         return `<li class="${done ? 'done' : now ? 'now' : ''}">
           <span class="mark">${done ? '✓' : now ? '▶' : '○'}</span>${art(a, true)}
-          <span>${esc(a.title)}</span><span class="left">${left}</span></li>`;
+          <span>${esc(a.title)}</span>
+          <span class="left"${now ? ` data-timer="${i}"` : ''}>${now ? timerText(t, a) : ''}</span></li>`;
       }).join('');
       return `<ul class="timetable">${rows}</ul>`;
     }
 
-    function render() {
+    function estimatedFinish() {
+      if (!session) return null;
+      let longest = 0;
+      let anyLeft = false;
+      for (const t of session.tracks || []) {
+        if (t.completed) continue;
+        anyLeft = true;
+        let total = 0;
+        t.activities.forEach((a, j) => {
+          if (j < t.currentIndex) return;
+          if (j === t.currentIndex) {
+            const left = remaining(a);
+            total += left != null ? left : (a.planningEstimateMs || 0);
+          } else {
+            total += a.countdownMs || a.planningEstimateMs || 0;
+          }
+        });
+        longest = Math.max(longest, total);
+      }
+      return anyLeft ? new Date(Date.now() + longest) : null;
+    }
+
+    function build() {
       const empty = document.getElementById('empty');
       const live = document.getElementById('live');
       if (!session) { empty.hidden = false; live.hidden = true; return; }
       empty.hidden = true; live.hidden = false;
       document.getElementById('title').textContent = session.routineName || 'Routine';
-      document.getElementById('clock').textContent = new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
-      const tracks = document.getElementById('tracks');
-      tracks.innerHTML = (session.tracks || []).map((t, i) => {
+      document.getElementById('tracks').innerHTML = (session.tracks || []).map((t, i) => {
         const current = t.completed ? null : t.activities[t.currentIndex];
         const next = t.completed ? null : t.activities[t.currentIndex + 1];
-        const body = display.mode === 'firstThen' ? firstThenView(t, current, next)
-          : display.mode === 'timetable' ? timetableView(t)
-          : timerView(t, current, next);
+        const body = display.mode === 'firstThen' ? firstThenView(i, t, current, next)
+          : display.mode === 'timetable' ? timetableView(i, t)
+          : timerView(i, t, current, next);
         return `<div class="track${i % 2 ? ' alt' : ''}">
           <div class="track-head"><strong>${esc(t.displayName)}</strong>
           <span>${Math.min(t.currentIndex, t.activities.length)}/${t.activities.length} done</span></div>
           ${body}</div>`;
       }).join('');
+      tick();
     }
 
-    // Receiver renders countdowns locally from deadlines — the phone is authority for advances.
-    setInterval(render, 250);
+    function tick() {
+      document.getElementById('clock').textContent =
+        new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+      if (!session) return;
+      const finish = estimatedFinish();
+      document.getElementById('eta').textContent = finish
+        ? 'Finishes about ' + finish.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'})
+        : '';
+      (session.tracks || []).forEach((t, i) => {
+        const current = t.completed ? null : t.activities[t.currentIndex];
+        document.querySelectorAll(`[data-timer="${i}"]`).forEach((el) => {
+          el.textContent = timerText(t, current);
+        });
+        const pct = barPct(current);
+        document.querySelectorAll(`[data-bar="${i}"]`).forEach((el) => {
+          if (pct != null) el.style.width = pct + '%';
+        });
+      });
+    }
+
+    // The phone is the authority for advances; the TV only counts down locally.
+    setInterval(tick, 250);
   </script>
 </body>
 </html>
