@@ -66,8 +66,81 @@
     // Custom message namespace must match Flutter CastProtocol.kCastNamespace
     const NAMESPACE = 'urn:x-cast:com.familyroutines.session';
     let session = null;
-    let display = { mode: 'timer', showTimer: true };
+    let display = { mode: 'timer', showTimer: true, playSounds: true };
     let symbolsReady = false;
+
+    // Step sounds, synthesised with the same recipes as the phone's WAVs so
+    // nothing extra needs hosting. Played when a step's timer runs out —
+    // including steps the TV advances itself while the phone is locked.
+    let audioCtx = null;
+    const chimeBuffers = {};
+
+    function addTone(buf, sr, freq, dur, partials, decay, attack, startSec) {
+      const n = Math.floor(dur * sr), start = Math.floor(startSec * sr);
+      for (let i = 0; i < n && start + i < buf.length; i++) {
+        const t = i / sr;
+        const env = Math.min(1, t / attack) * Math.exp(-decay * t);
+        let v = 0;
+        for (const [r, a] of partials) {
+          v += a * Math.sin(2 * Math.PI * freq * r * t) * Math.exp(-decay * (r - 1) * 0.5 * t);
+        }
+        buf[start + i] += env * v;
+      }
+    }
+
+    function synthChime(name, sr) {
+      const len = { gentle: 1.6, bell: 2.6, birds: 1.6, tada: 1.9 }[name];
+      if (!len) return null;
+      const buf = new Float32Array(Math.floor(len * sr));
+      if (name === 'gentle') {
+        addTone(buf, sr, 659.25, 1.2, [[1, 1], [4, 0.08]], 4.5, 0.005, 0);
+        addTone(buf, sr, 523.25, 1.2, [[1, 1], [4, 0.08]], 4.0, 0.005, 0.28);
+      } else if (name === 'bell') {
+        addTone(buf, sr, 880, 2.6, [[1, 1], [2, 0.6], [2.76, 0.45], [5.4, 0.25], [8.93, 0.12]], 1.6, 0.002, 0);
+      } else if (name === 'birds') {
+        const chirps = [[0.08, 2700, 4500], [0.09, 2900, 4300], [0.075, 2650, 4700], [0.095, 2850, 4400], [0.085, 2750, 4600]];
+        let t0 = 0;
+        chirps.forEach(([dur, f0, f1], k) => {
+          const n = Math.floor(dur * sr), start = Math.floor(t0 * sr);
+          let phase = 0;
+          for (let i = 0; i < n && start + i < buf.length; i++) {
+            const x = i / n;
+            phase += 2 * Math.PI * (f0 + (f1 - f0) * Math.sin(Math.PI * x / 2)) / sr;
+            buf[start + i] += Math.pow(Math.sin(Math.PI * x), 2) * Math.sin(phase);
+          }
+          t0 += dur + (k % 2 === 0 ? 0.05 : 0.18);
+        });
+      } else if (name === 'tada') {
+        [523.25, 659.25, 783.99, 1046.5].forEach((f, j) => {
+          addTone(buf, sr, f, 1.5 - j * 0.1, [[1, 1], [2, 0.3], [3, 0.15]], 2.2, 0.004, j * 0.09);
+        });
+      }
+      let peak = 0;
+      for (const s of buf) peak = Math.max(peak, Math.abs(s));
+      if (peak > 0) for (let i = 0; i < buf.length; i++) buf[i] *= 0.7 / peak;
+      return buf;
+    }
+
+    function playChime(name) {
+      if (display.playSounds === false || !name || name === 'none') return;
+      try {
+        audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        if (!chimeBuffers[name]) {
+          const samples = synthChime(name, audioCtx.sampleRate);
+          if (!samples) return;
+          const buffer = audioCtx.createBuffer(1, samples.length, audioCtx.sampleRate);
+          buffer.copyToChannel(samples, 0);
+          chimeBuffers[name] = buffer;
+        }
+        const src = audioCtx.createBufferSource();
+        src.buffer = chimeBuffers[name];
+        src.connect(audioCtx.destination);
+        src.start();
+      } catch (e) {
+        console.warn('Chime failed', e);
+      }
+    }
 
     // Fallback when the icon font can't load (e.g. no internet on the TV).
     const EMOJI = {
@@ -245,6 +318,44 @@
       return session ? (session.tracks || []).map(projectTrack) : [];
     }
 
+    // Upcoming step ends per track, chained through automatic steps — the same
+    // rule as projectTrack(). Includes the first step that waits for a person.
+    function stepEnds(t) {
+      const ends = [];
+      if (!session || session.status !== 'running' || t.completed) return ends;
+      let i = t.currentIndex;
+      let a = t.activities[i];
+      if (!a || a.status !== 'active' || !a.deadline) return ends;
+      let end = Date.parse(a.deadline);
+      while (a) {
+        ends.push({ key: a.instanceId + '@' + end, at: end, chime: a.chime });
+        const next = t.activities[i + 1];
+        if (a.progressionMode !== 'automatic' || !next || next.sharedStepId ||
+            next.progressionMode === 'untimed' || next.countdownMs == null) break;
+        end += next.countdownMs;
+        a = next;
+        i++;
+      }
+      return ends;
+    }
+
+    let lastSoundCheck = Date.now();
+    const chimed = new Set();
+    function playDueChimes() {
+      const now = Date.now();
+      let due = null;
+      for (const t of (session && session.tracks) || []) {
+        for (const e of stepEnds(t)) {
+          if (e.at > lastSoundCheck && e.at <= now && !chimed.has(e.key)) {
+            chimed.add(e.key);
+            due = due || e.chime;
+          }
+        }
+      }
+      lastSoundCheck = now;
+      if (due) playChime(due);
+    }
+
     let builtShape = '';
     function shapeOf(tracks) {
       return tracks.map((t) => t.currentIndex + ':' + (t.completed ? 1 : 0)).join('|');
@@ -298,6 +409,7 @@
       document.getElementById('clock').textContent =
         new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
       if (!session) return;
+      playDueChimes();
       const tracks = viewTracks();
       if (shapeOf(tracks) !== builtShape) { build(); return; }
       const finish = estimatedFinish();
