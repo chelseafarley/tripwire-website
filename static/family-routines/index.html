@@ -207,11 +207,54 @@
       return `<ul class="timetable">${rows}</ul>`;
     }
 
+    // While the phone is locked it can't send updates, so advance automatic
+    // steps locally from their deadlines (same rule as the phone's engine).
+    // The phone's next update replaces this projection.
+    function projectTrack(t) {
+      if (!session || session.status !== 'running' || t.completed) return t;
+      let i = t.currentIndex;
+      let a = t.activities[i];
+      if (!a || a.status !== 'active' || !a.deadline) return t;
+      let end = Date.parse(a.deadline);
+      const now = Date.now();
+      if (end > now || a.progressionMode !== 'automatic') return t;
+      const activities = t.activities.slice();
+      while (end <= now && a.progressionMode === 'automatic') {
+        activities[i] = Object.assign({}, a, { status: 'completed', deadline: null });
+        const next = activities[i + 1];
+        if (!next) {
+          return Object.assign({}, t, { activities, currentIndex: i + 1, completed: true });
+        }
+        i++;
+        if (next.sharedStepId) {
+          activities[i] = Object.assign({}, next, { status: 'waitingForGroup', deadline: null });
+          return Object.assign({}, t, { activities, currentIndex: i });
+        }
+        if (next.progressionMode === 'untimed' || next.countdownMs == null) {
+          activities[i] = Object.assign({}, next, { status: 'active', deadline: null });
+          return Object.assign({}, t, { activities, currentIndex: i });
+        }
+        end += next.countdownMs;
+        a = Object.assign({}, next, { status: 'active', deadline: new Date(end).toISOString() });
+        activities[i] = a;
+      }
+      return Object.assign({}, t, { activities, currentIndex: i });
+    }
+
+    function viewTracks() {
+      return session ? (session.tracks || []).map(projectTrack) : [];
+    }
+
+    let builtShape = '';
+    function shapeOf(tracks) {
+      return tracks.map((t) => t.currentIndex + ':' + (t.completed ? 1 : 0)).join('|');
+    }
+
     function estimatedFinish() {
       if (!session) return null;
       let longest = 0;
       let anyLeft = false;
-      for (const t of session.tracks || []) {
+      for (const t of viewTracks()) {
         if (t.completed) continue;
         anyLeft = true;
         let total = 0;
@@ -235,7 +278,9 @@
       if (!session) { empty.hidden = false; live.hidden = true; return; }
       empty.hidden = true; live.hidden = false;
       document.getElementById('title').textContent = session.routineName || 'Routine';
-      document.getElementById('tracks').innerHTML = (session.tracks || []).map((t, i) => {
+      const tracks = viewTracks();
+      builtShape = shapeOf(tracks);
+      document.getElementById('tracks').innerHTML = tracks.map((t, i) => {
         const current = t.completed ? null : t.activities[t.currentIndex];
         const next = t.completed ? null : t.activities[t.currentIndex + 1];
         const body = display.mode === 'firstThen' ? firstThenView(i, t, current, next)
@@ -253,11 +298,13 @@
       document.getElementById('clock').textContent =
         new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
       if (!session) return;
+      const tracks = viewTracks();
+      if (shapeOf(tracks) !== builtShape) { build(); return; }
       const finish = estimatedFinish();
       document.getElementById('eta').textContent = finish
         ? 'Finishes about ' + finish.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'})
         : '';
-      (session.tracks || []).forEach((t, i) => {
+      tracks.forEach((t, i) => {
         const current = t.completed ? null : t.activities[t.currentIndex];
         document.querySelectorAll(`[data-timer="${i}"]`).forEach((el) => {
           el.textContent = timerText(t, current);
